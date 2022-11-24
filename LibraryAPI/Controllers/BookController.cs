@@ -12,45 +12,46 @@ using LibraryAPI.Models;
 
 namespace LibraryAPI.Controllers
 {
-    [Authorize(Roles="admin")]
-    public class UserController : ApiController
+    [Authorize]
+    public class BookController : ApiController
     {
         private libraryManagementEntities db = new libraryManagementEntities();
 
-        // GET: api/User
-        public IQueryable<user> Getusers()
+        // GET: api/Book
+        public IQueryable<book> Getbooks()
         {
-            return db.users;
+            return db.books;
         }
 
-        // GET: api/User/5
-        [ResponseType(typeof(user))]
-        public IHttpActionResult Getuser(int id)
+        // GET: api/Book/5
+        [ResponseType(typeof(book))]
+        public IHttpActionResult Getbook(int id)
         {
-            user user = db.users.Find(id);
-            if (user == null)
+            book book = db.books.Find(id);
+            if (book == null)
             {
                 return NotFound();
             }
 
-            return Ok(user);
+            return Ok(book);
         }
 
-        // PUT: api/User/5
+        // PUT: api/Book/5
+        [Authorize(Roles = "admin")]
         [ResponseType(typeof(void))]
-        public IHttpActionResult Putuser(int id, user user)
+        public IHttpActionResult Putbook(int id, book book)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != user.id)
+            if (id != book.id)
             {
                 return BadRequest();
             }
 
-            db.Entry(user).State = EntityState.Modified;
+            db.Entry(book).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +59,7 @@ namespace LibraryAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!userExists(id))
+                if (!bookExists(id))
                 {
                     return NotFound();
                 }
@@ -71,35 +72,37 @@ namespace LibraryAPI.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/User
-        [ResponseType(typeof(user))]
-        public IHttpActionResult Postuser(user user)
+        // POST: api/Book
+        [Authorize(Roles = "admin")]
+        [ResponseType(typeof(book))]
+        public IHttpActionResult Postbook(book book)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.users.Add(user);
+            db.books.Add(book);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = user.id }, user);
+            return CreatedAtRoute("DefaultApi", new { id = book.id }, book);
         }
 
-        // DELETE: api/User/5
-        [ResponseType(typeof(user))]
-        public IHttpActionResult Deleteuser(int id)
+        // DELETE: api/Book/5
+        [Authorize(Roles = "admin")]
+        [ResponseType(typeof(book))]
+        public IHttpActionResult Deletebook(int id)
         {
-            user user = db.users.Find(id);
-            if (user == null)
+            book book = db.books.Find(id);
+            if (book == null)
             {
                 return NotFound();
             }
 
-            db.users.Remove(user);
+            db.books.Remove(book);
             db.SaveChanges();
 
-            return Ok(user);
+            return Ok(book);
         }
 
         protected override void Dispose(bool disposing)
@@ -111,9 +114,9 @@ namespace LibraryAPI.Controllers
             base.Dispose(disposing);
         }
 
-        private bool userExists(int id)
+        private bool bookExists(int id)
         {
-            return db.users.Count(e => e.id == id) > 0;
+            return db.books.Count(e => e.id == id) > 0;
         }
     }
 }
