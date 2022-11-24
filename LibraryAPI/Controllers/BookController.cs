@@ -85,7 +85,7 @@ namespace LibraryAPI.Controllers
             db.books.Add(book);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = book.id }, book);
+            return CreatedAtRoute("Book", new { id = book.id }, book);
         }
 
         // DELETE: api/Book/5

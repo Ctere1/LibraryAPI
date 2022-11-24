@@ -83,7 +83,7 @@ namespace LibraryAPI.Controllers
             db.users.Add(user);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = user.id }, user);
+            return CreatedAtRoute("User", new { id = user.id }, user);
         }
 
         // DELETE: api/User/5
