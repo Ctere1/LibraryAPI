@@ -130,7 +130,7 @@ namespace LibraryAPI.Controllers
 
         // DELETE: api/Book/5
         [Authorize(Roles = "admin")]
-        [ResponseType(typeof(book))]
+        [ResponseType(typeof(string))]
         public IHttpActionResult Deletebook(int id)
         {
             book book = db.books.Find(id);
@@ -147,7 +147,7 @@ namespace LibraryAPI.Controllers
         }
 
         // PUT: api/Book
-        [ResponseType(typeof(book))]
+        [ResponseType(typeof(string))]
         [Route("api/Book/Borrow")]
         [Authorize(Roles = "user")]
         public IHttpActionResult PutBorrow(book book)
@@ -178,7 +178,7 @@ namespace LibraryAPI.Controllers
         }
 
         // PUT: api/Book
-        [ResponseType(typeof(book))]
+        [ResponseType(typeof(string))]
         [Route("api/Book/Return")]
         public IHttpActionResult PutReturn(book book)
         {

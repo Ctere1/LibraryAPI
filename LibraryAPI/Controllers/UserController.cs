@@ -161,7 +161,7 @@ namespace LibraryAPI.Controllers
         }
 
         // DELETE: api/User/5
-        [ResponseType(typeof(user))]
+        [ResponseType(typeof(string))]
         [Authorize(Roles = "admin")]
         public IHttpActionResult Deleteuser(int id)
         {

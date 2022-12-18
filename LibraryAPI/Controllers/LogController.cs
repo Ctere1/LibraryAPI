@@ -48,7 +48,7 @@ namespace LibraryAPI.Controllers
 
         // DELETE: api/Log/5
         [Authorize(Roles = "admin")]
-        [ResponseType(typeof(log))]
+        [ResponseType(typeof(string))]
         public IHttpActionResult Deletelog(int id)
         {
             log log = db.logs.Find(id);

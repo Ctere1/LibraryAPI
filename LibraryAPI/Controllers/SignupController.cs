@@ -20,7 +20,7 @@ namespace LibraryAPI.Controllers
         private libraryManagementEntities db = new libraryManagementEntities();
 
         // POST: api/Signup
-        [ResponseType(typeof(user))]
+        [ResponseType(typeof(string))]
         public IHttpActionResult Signup(user user)
         {
             if (!ModelState.IsValid)
