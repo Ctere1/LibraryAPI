@@ -10,6 +10,7 @@ using System.Runtime.Remoting.Messaging;
 using System.Web.Http;
 using System.Web.Http.Description;
 using System.Web.Security;
+using LibraryAPI.HelperMethods;
 using LibraryAPI.Models;
 
 namespace LibraryAPI.Controllers
@@ -17,6 +18,7 @@ namespace LibraryAPI.Controllers
     [Authorize(Roles = "admin")]
     public class UserController : ApiController
     {
+        LogHelper helper = new LogHelper();
         private libraryManagementEntities db = new libraryManagementEntities();
 
         // GET: api/User
@@ -39,7 +41,7 @@ namespace LibraryAPI.Controllers
         }
 
         // PUT: api/User
-        [ResponseType(typeof(void))]
+        [ResponseType(typeof(user))]
         public IHttpActionResult Putuser(user user)
         {
             if (!ModelState.IsValid)
@@ -70,6 +72,7 @@ namespace LibraryAPI.Controllers
                 }
             }
 
+            helper.InsertLog(User.Identity.Name, "User updated via API");
             return Ok(user);
         }
 
@@ -86,6 +89,8 @@ namespace LibraryAPI.Controllers
             {
                 db.users.Add(user);
                 db.SaveChanges();
+                helper.InsertLog(User.Identity.Name, "User created via API");
+
                 return CreatedAtRoute("DefaultApi", new { id = user.id }, user);
             }
             else
@@ -106,6 +111,7 @@ namespace LibraryAPI.Controllers
 
             db.users.Remove(user);
             db.SaveChanges();
+            helper.InsertLog(User.Identity.Name, "User deleted via API");
 
             return Content(HttpStatusCode.OK, "User deleted");
         }

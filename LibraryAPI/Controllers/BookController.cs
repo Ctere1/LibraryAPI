@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using LibraryAPI.HelperMethods;
 using LibraryAPI.Models;
 
 namespace LibraryAPI.Controllers
@@ -15,12 +16,23 @@ namespace LibraryAPI.Controllers
     [Authorize]
     public class BookController : ApiController
     {
+        LogHelper helper = new LogHelper();
         private libraryManagementEntities db = new libraryManagementEntities();
 
         // GET: api/Book
         public IQueryable<book> Getbooks()
         {
-            return db.books;
+            if (User.IsInRole("admin")) //Admin
+            {
+                return db.books;
+            }
+            else //User
+            {
+                var username = User.Identity.Name;
+                var books = db.books.Where(b => b.borrowedBy == username);
+                return books;
+            }
+
         }
 
         // GET: api/Book/5
@@ -38,7 +50,7 @@ namespace LibraryAPI.Controllers
 
         // PUT: api/Book/5
         [Authorize(Roles = "admin")]
-        [ResponseType(typeof(void))]
+        [ResponseType(typeof(book))]
         public IHttpActionResult Putbook(book book)
         {
             if (!ModelState.IsValid)
@@ -68,7 +80,7 @@ namespace LibraryAPI.Controllers
                     throw;
                 }
             }
-
+            helper.InsertLog(User.Identity.Name, "Book updated via API");
             return Ok(book);
         }
 
@@ -87,6 +99,7 @@ namespace LibraryAPI.Controllers
             {
                 db.books.Add(book);
                 db.SaveChanges();
+                helper.InsertLog(User.Identity.Name, "Book created via API");
                 return CreatedAtRoute("DefaultApi", new { id = book.id }, book);
             }
             else
@@ -108,6 +121,7 @@ namespace LibraryAPI.Controllers
 
             db.books.Remove(book);
             db.SaveChanges();
+            helper.InsertLog(User.Identity.Name, "Book deleted via API");
 
             return Content(HttpStatusCode.OK, "Book deleted");
         }

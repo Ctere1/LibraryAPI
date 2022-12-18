@@ -37,7 +37,7 @@ namespace LibraryAPI.Providers
             else if (userList.Exists(x => x.email == context.UserName) && userList.Exists(x => x.password == context.Password))
             {
                 var identity = new ClaimsIdentity(context.Options.AuthenticationType);
-                identity.AddClaim(new Claim(ClaimTypes.Email, context.UserName));
+                identity.AddClaim(new Claim(ClaimTypes.Name, context.UserName));
                 identity.AddClaim(new Claim(ClaimTypes.Role, "user"));
                 context.Validated(identity);
             }

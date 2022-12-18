@@ -12,7 +12,7 @@ using LibraryAPI.Models;
 
 namespace LibraryAPI.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize]
     public class LogController : ApiController
     {
         private libraryManagementEntities db = new libraryManagementEntities();
@@ -20,11 +20,21 @@ namespace LibraryAPI.Controllers
         // GET: api/Log
         public IQueryable<log> Getlogs()
         {
-            return db.logs;
+            if (User.IsInRole("admin")) //Admin
+            {
+                return db.logs;
+            }
+            else //User
+            {
+                var username = User.Identity.Name;
+                var logs = db.logs.Where(b => b.user_email == username);
+                return logs;
+            }
         }
 
         // GET: api/Log/5
         [ResponseType(typeof(log))]
+        [Authorize(Roles = "admin")]
         public IHttpActionResult Getlog(int id)
         {
             log log = db.logs.Find(id);
@@ -37,6 +47,7 @@ namespace LibraryAPI.Controllers
         }
 
         // DELETE: api/Log/5
+        [Authorize(Roles = "admin")]
         [ResponseType(typeof(log))]
         public IHttpActionResult Deletelog(int id)
         {
