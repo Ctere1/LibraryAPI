@@ -6,13 +6,15 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.Remoting.Messaging;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Security;
 using LibraryAPI.Models;
 
 namespace LibraryAPI.Controllers
 {
-    [Authorize(Roles="admin")]
+    [Authorize(Roles = "admin")]
     public class UserController : ApiController
     {
         private libraryManagementEntities db = new libraryManagementEntities();
@@ -36,16 +38,16 @@ namespace LibraryAPI.Controllers
             return Ok(user);
         }
 
-        // PUT: api/User/5
+        // PUT: api/User
         [ResponseType(typeof(void))]
-        public IHttpActionResult Putuser(int id, user user)
+        public IHttpActionResult Putuser(user user)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != user.id)
+            if (user.id == null)
             {
                 return BadRequest();
             }
@@ -58,17 +60,17 @@ namespace LibraryAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!userExists(id))
+                if (!userExists(user.id))
                 {
-                    return NotFound();
+                    return Content(HttpStatusCode.NotFound, "User not exists. Check the user id");
                 }
                 else
                 {
-                    throw;
+                    return BadRequest();
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok(user);
         }
 
         // POST: api/User
@@ -79,11 +81,17 @@ namespace LibraryAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-
-            db.users.Add(user);
-            db.SaveChanges();
-
-            return CreatedAtRoute("User", new { id = user.id }, user);
+            var userInDb = db.users.Any(x => x.email == user.email);
+            if (!userInDb)
+            {
+                db.users.Add(user);
+                db.SaveChanges();
+                return CreatedAtRoute("DefaultApi", new { id = user.id }, user);
+            }
+            else
+            {
+                return BadRequest("User already exists. Change the user email and try again");
+            }
         }
 
         // DELETE: api/User/5
@@ -99,7 +107,7 @@ namespace LibraryAPI.Controllers
             db.users.Remove(user);
             db.SaveChanges();
 
-            return Ok(user);
+            return Content(HttpStatusCode.OK, "User deleted");
         }
 
         protected override void Dispose(bool disposing)

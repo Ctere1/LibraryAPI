@@ -34,16 +34,16 @@ namespace LibraryAPI.Providers
                 identity.AddClaim(new Claim(ClaimTypes.Role, "admin"));
                 context.Validated(identity);
             }
-            else if (userList.Exists(x => x.name == context.UserName) && userList.Exists(x => x.password == context.Password))
+            else if (userList.Exists(x => x.email == context.UserName) && userList.Exists(x => x.password == context.Password))
             {
                 var identity = new ClaimsIdentity(context.Options.AuthenticationType);
-                identity.AddClaim(new Claim(ClaimTypes.Name, context.UserName));
+                identity.AddClaim(new Claim(ClaimTypes.Email, context.UserName));
                 identity.AddClaim(new Claim(ClaimTypes.Role, "user"));
                 context.Validated(identity);
             }
             else
             {
-                context.SetError("invalid_grant", "Username or password incorrect");
+                context.SetError("invalid_grant", "User credentials incorrect");
             }
         }
     }

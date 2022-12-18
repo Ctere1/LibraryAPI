@@ -39,14 +39,14 @@ namespace LibraryAPI.Controllers
         // PUT: api/Book/5
         [Authorize(Roles = "admin")]
         [ResponseType(typeof(void))]
-        public IHttpActionResult Putbook(int id, book book)
+        public IHttpActionResult Putbook(book book)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != book.id)
+            if (book.id == null)
             {
                 return BadRequest();
             }
@@ -59,9 +59,9 @@ namespace LibraryAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!bookExists(id))
+                if (!bookExists(book.id))
                 {
-                    return NotFound();
+                    return Content(HttpStatusCode.NotFound, "Book not exists. Check the book id");
                 }
                 else
                 {
@@ -69,7 +69,7 @@ namespace LibraryAPI.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok(book);
         }
 
         // POST: api/Book
@@ -82,10 +82,17 @@ namespace LibraryAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.books.Add(book);
-            db.SaveChanges();
-
-            return CreatedAtRoute("Book", new { id = book.id }, book);
+            var bookInDb = db.books.Any(x => x.name == book.name);
+            if (!bookInDb)
+            {
+                db.books.Add(book);
+                db.SaveChanges();
+                return CreatedAtRoute("DefaultApi", new { id = book.id }, book);
+            }
+            else
+            {
+                return BadRequest("Book already exists. Change the book name and try again");
+            }
         }
 
         // DELETE: api/Book/5
@@ -102,7 +109,7 @@ namespace LibraryAPI.Controllers
             db.books.Remove(book);
             db.SaveChanges();
 
-            return Ok(book);
+            return Content(HttpStatusCode.OK, "Book deleted");
         }
 
         protected override void Dispose(bool disposing)

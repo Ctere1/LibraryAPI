@@ -14,26 +14,11 @@ namespace LibraryAPI
             // Web API routes
             config.MapHttpAttributeRoutes();
 
-            //user Route
             config.Routes.MapHttpRoute(
-                name: "User",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { controller = "User", id = RouteParameter.Optional }
+                name: "DefaultApi",
+               routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
             );
-
-
-            //user Book
-            config.Routes.MapHttpRoute(
-                name: "Book",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { controller = "Book", id = RouteParameter.Optional }
-            );
-
-            //config.Routes.MapHttpRoute(
-            //    name: "DefaultApi",
-            //    routeTemplate: "api/{controller}/{id}",
-            //    defaults: new { id = RouteParameter.Optional }
-            //);
         }
     }
 }
