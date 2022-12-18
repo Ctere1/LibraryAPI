@@ -20,17 +20,37 @@ namespace LibraryAPI.Controllers
         private libraryManagementEntities db = new libraryManagementEntities();
 
         // GET: api/Book
-        public IQueryable<book> Getbooks()
+        public IQueryable<book> Getbooks(bool dueDateExpired = false)
         {
-            if (User.IsInRole("admin")) //Admin
+            if (dueDateExpired)
+            {
+                var dueDateExpiredBooks = db.books.Where(b => b.issuedTo < DateTime.Now);
+                return dueDateExpiredBooks;
+            }
+            else
             {
                 return db.books;
             }
-            else //User
+
+        }
+
+        // GET: api/Book
+        [ResponseType(typeof(book))]
+        [Authorize(Roles = "user")]
+        [Route("api/Book/MyBooks")]
+        public IHttpActionResult GetMyBooks(bool dueDateExpired = false)
+        {
+            var username = User.Identity.Name;
+            if (dueDateExpired)
             {
-                var username = User.Identity.Name;
+                var books = db.books.Where(b => b.borrowedBy == username && b.issuedTo < DateTime.Now);
+                return Ok(books);
+            }
+            else
+            {
+
                 var books = db.books.Where(b => b.borrowedBy == username);
-                return books;
+                return Ok(books);
             }
 
         }
@@ -124,6 +144,63 @@ namespace LibraryAPI.Controllers
             helper.InsertLog(User.Identity.Name, "Book deleted via API");
 
             return Content(HttpStatusCode.OK, "Book deleted");
+        }
+
+        // PUT: api/Book
+        [ResponseType(typeof(book))]
+        [Route("api/Book/Borrow")]
+        [Authorize(Roles = "user")]
+        public IHttpActionResult PutBorrow(book book)
+        {
+            var username = User.Identity.Name;
+
+            book existingBook = db.books.Find(book.id);
+            if (ModelState.IsValid)
+            {
+                existingBook.isActive = false;
+                existingBook.issuedFrom = DateTime.Now;
+                existingBook.issuedTo = book.issuedTo;
+                if (book.issuedTo == null || book.issuedTo < DateTime.Now)
+                {
+                    return Content(HttpStatusCode.BadRequest, "Issued To must be greater than '" + DateTime.Now.ToString("MM/dd/yyyy") + "'");
+                }
+                existingBook.borrowedBy = username;
+                db.Entry(existingBook).State = EntityState.Modified;
+                db.SaveChanges();
+                helper.InsertLog(username, username + " borrowed Book: " + existingBook.name + " via API");
+                return Content(HttpStatusCode.OK, "Book borrowed");
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
+
+        }
+
+        // PUT: api/Book
+        [ResponseType(typeof(book))]
+        [Route("api/Book/Return")]
+        public IHttpActionResult PutReturn(book book)
+        {
+            var username = User.Identity.Name;
+
+            book existingBook = db.books.Find(book.id);
+            if (ModelState.IsValid)
+            {
+                existingBook.isActive = true;
+                existingBook.issuedFrom = null;
+                existingBook.issuedTo = null;
+                existingBook.borrowedBy = null;
+                db.Entry(existingBook).State = EntityState.Modified;
+                db.SaveChanges();
+                helper.InsertLog(username, username + " returned Book: " + existingBook.name + " via API");
+                return Content(HttpStatusCode.OK, "Book returned");
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
+
         }
 
         protected override void Dispose(bool disposing)

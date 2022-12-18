@@ -15,20 +15,80 @@ using LibraryAPI.Models;
 
 namespace LibraryAPI.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize]
     public class UserController : ApiController
     {
         LogHelper helper = new LogHelper();
         private libraryManagementEntities db = new libraryManagementEntities();
 
         // GET: api/User
+        [Authorize(Roles = "admin")]
         public IQueryable<user> Getusers()
         {
             return db.users;
         }
 
+        // GET: api/User/MyProfile
+        [ResponseType(typeof(user))]
+        [Route("api/User/MyProfile")]
+        public IHttpActionResult GetMyProfile()
+        {
+            if (User.IsInRole("admin"))
+            {
+                var username = User.Identity.Name;
+                var admin = db.admins.Where(b => b.name == username);
+                return Ok(admin);
+            }
+            else
+            {
+                var username = User.Identity.Name;
+                var user = db.users.Where(b => b.email == username);
+                return Ok(user);
+            }
+
+        }
+
+        // PUT: api/User
+        [ResponseType(typeof(admin))]
+        [Route("api/User/AdminProfile")]
+        [Authorize(Roles = "admin")]
+        public IHttpActionResult PutAdminProfile(admin admin)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (admin.id == null)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(admin).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!userExists(admin.id))
+                {
+                    return Content(HttpStatusCode.NotFound, "Admin not exists. Check the admin id");
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+
+            helper.InsertLog(User.Identity.Name, "Admin updated via API");
+            return Ok(admin);
+        }
+
         // GET: api/User/5
         [ResponseType(typeof(user))]
+        [Authorize(Roles = "admin")]
         public IHttpActionResult Getuser(int id)
         {
             user user = db.users.Find(id);
@@ -78,6 +138,7 @@ namespace LibraryAPI.Controllers
 
         // POST: api/User
         [ResponseType(typeof(user))]
+        [Authorize(Roles = "admin")]
         public IHttpActionResult Postuser(user user)
         {
             if (!ModelState.IsValid)
@@ -101,6 +162,7 @@ namespace LibraryAPI.Controllers
 
         // DELETE: api/User/5
         [ResponseType(typeof(user))]
+        [Authorize(Roles = "admin")]
         public IHttpActionResult Deleteuser(int id)
         {
             user user = db.users.Find(id);
