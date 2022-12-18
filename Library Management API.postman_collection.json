@@ -1,0 +1,565 @@
+{
+	"info": {
+		"_postman_id": "4b91c2ea-431e-42bc-9b14-2d5864595ace",
+		"name": "Library Management API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15165331"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get My Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44365/api/User/MyProfile",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44365",
+							"path": [
+								"api",
+								"User",
+								"MyProfile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"enyeni\",\r\n    \"email\": \"enyeni@gmail.com\",\r\n    \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44365/api/User",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44365",
+							"path": [
+								"api",
+								"User"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Admin Profile",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"admin\",\r\n    \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44365/api/User/AdminProfile",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44365",
+							"path": [
+								"api",
+								"User",
+								"AdminProfile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44365/api/User",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44365",
+							"path": [
+								"api",
+								"User"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44365/api/User/21",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44365",
+							"path": [
+								"api",
+								"User",
+								"21"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 3,\r\n    \"name\": \"enyeni\",\r\n    \"email\": \"enyeni@gmail.com\",\r\n    \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44365/api/User",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44365",
+							"path": [
+								"api",
+								"User"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Book",
+			"item": [
+				{
+					"name": "Get Books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44365/api/Book",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44365",
+							"path": [
+								"api",
+								"Book"
+							],
+							"query": [
+								{
+									"key": "dueDateExpired",
+									"value": "true",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get My Books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44365/api/Book/MyBooks",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44365",
+							"path": [
+								"api",
+								"Book",
+								"MyBooks"
+							],
+							"query": [
+								{
+									"key": "dueDateExpired",
+									"value": "true",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Book",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"new book6\",\r\n    \"genre\": \"novel\",\r\n    \"language\": \"english\",\r\n    \"publisherName\": \"oxford press\",\r\n    \"authorName\": \"John\",\r\n    \"description\": \"lorem\",\r\n    \"isActive\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44365/api/Book",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44365",
+							"path": [
+								"api",
+								"Book"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Book",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"new book2\",\r\n    \"genre\": \"novel\",\r\n    \"language\": \"english\",\r\n    \"publisherName\": \"oxford press\",\r\n    \"authorName\": \"John\",\r\n    \"description\": \"lorem\",\r\n    \"isActive\": false,\r\n    \"issuedFrom\": \"2022-12-13T15:53:18.097\",\r\n    \"issuedTo\": \"2022-12-15T00:00:00\",\r\n    \"borrowedBy\": \"user@user.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44365/api/Book",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44365",
+							"path": [
+								"api",
+								"Book"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Borrow Book",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 5,\r\n    \"issuedTo\": \"2022-12-19T00:00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44365/api/Book/Borrow",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44365",
+							"path": [
+								"api",
+								"Book",
+								"Borrow"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Return Book",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44365/api/Book/Return",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44365",
+							"path": [
+								"api",
+								"Book",
+								"Return"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Book",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44365/api/Book/7",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44365",
+							"path": [
+								"api",
+								"Book",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Log",
+			"item": [
+				{
+					"name": "Delete Log",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44365/api/Log/76",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44365",
+							"path": [
+								"api",
+								"Log",
+								"76"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Logs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44365/api/Log",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44365",
+							"path": [
+								"api",
+								"Log"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Get Token",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "user@user.com",
+									"description": "Admin's \"name\" or User's \"email\".",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"description": "Admin's \"name\" or User's \"email\".",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://localhost:44365/api/Auth/GetToken",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44365",
+							"path": [
+								"api",
+								"Auth",
+								"GetToken"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Signup",
+			"item": [
+				{
+					"name": "Signup as User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"API_USER\",\r\n    \"email\": \"apiUser@gmail.com\",\r\n    \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44365/api/Signup",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44365",
+							"path": [
+								"api",
+								"Signup"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "2M5YcYYyALI6j5irOjBQuTrxjzyzpKBqK3wpIM-APc9jWvgWMVUtNSQO9rBI_QCXgdZztJQSny9o3e-eHRe3P4_HNia4TMG2nzxzPgepp1cF9Zy0vmBWOz24kzE1Wt3l1e_TgWGAvdhfd7V6x21C21powHKRbO4lQPb22qwXMvfmM_EKUuPJIQN0q2oHb47MEeA9Moftwd8a7L9FD7NWOtzc7nFF7HMXTysjmZjAGvRKzevAF24FHWGcriQ28oM-70k-01Td02ehRPqZWcR5QPyzgRjOZnyeovx2r3R96PxBUES_OqXlhptPAO3NDZLT",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
