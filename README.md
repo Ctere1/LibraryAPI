@@ -79,7 +79,7 @@ $ cd LibraryAPI
 | `GET`       | `api/Book/MyBooks`          |  Returns User's books                               | ☑️           |  ☑️        |
 | `POST`      | `api/Book`                  |  To create a Book                                   | ☑️           |  ❌        |
 | `PUT`       | `api/Book/Return`           |  To return a Book                                   | ☑️           |  ☑️        |
-| `PUT`       | `api/Book/Borrow`           |  To borrow a Book                                   | ☑️           |  ☑️        |
+| `PUT`       | `api/Book/Borrow`           |  To borrow a Book                                   | ❌           |  ☑️        |
 | `DELETE`    | `api/Book`                  |  To delete a Book                                   | ☑️           |  ❌        |
 > See Postman Collection Json for detailed information. Also Swagger Doc included in this project.
 
