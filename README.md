@@ -67,7 +67,7 @@ $ cd LibraryAPI
 | :---------- | :------------------------   |:----------------------------------                  |:-----------  |:----------- |
 | `GET`       | `api/Book`                  |  Returns Book(s)                                    | ☑️           |  ☑️        |
 | `PUT`       | `api/Book`                  |  To update Book                                     | ☑️           |  ❌        |
-| `GET`       | `api/Book/MyBooks`          |  Returns User's books                               | ☑️           |  ☑️        |
+| `GET`       | `api/Book/MyBooks`          |  Returns User's books                               | ❌           |  ☑️        |
 | `POST`      | `api/Book`                  |  To create a Book                                   | ☑️           |  ❌        |
 | `PUT`       | `api/Book/Return`           |  To return a Book                                   | ☑️           |  ☑️        |
 | `PUT`       | `api/Book/Borrow`           |  To borrow a Book                                   | ❌           |  ☑️        |
