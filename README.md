@@ -15,7 +15,7 @@ Library API that you can manage the books and it's users. As **User** you can:
 * Borrow a Book 
 * Return the Book
 * Get book(s) 
-* Get profile auth Logs
+* Get your profile auth Logs
 * Update your profile credentials
 
 As **Admin** you can:
@@ -46,21 +46,21 @@ $ cd LibraryAPI
 
 ### Authentication Endpoint
 
-| HTTP Verb   | Endpoint                    | Description                                         |Admmin Access | User Access | 
+| HTTP Verb   | Endpoint                    | Description                                         |Admin Access  | User Access | 
 | :---------- | :-----------                |:----------------------------------                  |:-----------  |:----------- |
 | `GET`       | `api/Auth/GetToken`         |  Returns Bearer Token                               | ☑️          |  ☑️         |
 > See Postman Collection Json for detailed information. Also Swagger Doc included in this project.
 
 ### Signup Endpoint
 
-| HTTP Verb   | Endpoint                    | Description                                         |Admmin Access | User Access | 
+| HTTP Verb   | Endpoint                    | Description                                         |Admin Access  | User Access | 
 | :---------- | :-----------                |:----------------------------------                  |:-----------  |:----------- |
 | `POST`      | `api/Signup`                |  To create a new User                               | ☑️          |  ☑️         |
 > See Postman Collection Json for detailed information. Also Swagger Doc included in this project.
 
 ### User Endpoints
 
-| HTTP Verb   | Endpoint                    | Description                                         |Admmin Access | User Access | 
+| HTTP Verb   | Endpoint                    | Description                                         |Admin Access  | User Access | 
 | :---------- | :-----------                |:----------------------------------                  |:-----------  |:----------- |
 | `GET`       | `api/User`                  |  Returns User(s)                                    | ☑️           |  ❌        |
 | `PUT`       | `api/User`                  |  To update a User                                   | ☑️           |  ❌        |
@@ -72,7 +72,7 @@ $ cd LibraryAPI
 
 ### Book Endpoints
 
-| HTTP Verb   | Endpoint                    | Description                                         |Admmin Access | User Access | 
+| HTTP Verb   | Endpoint                    | Description                                         |Admin Access  | User Access | 
 | :---------- | :-----------                |:----------------------------------                  |:-----------  |:----------- |
 | `GET`       | `api/Book`                  |  Returns Book(s)                                    | ☑️           |  ☑️        |
 | `PUT`       | `api/Book`                  |  To update Book                                     | ☑️           |  ❌        |
@@ -85,7 +85,7 @@ $ cd LibraryAPI
 
 ### Log Endpoints
 
-| HTTP Verb   | Endpoint                    | Description                                         |Admmin Access | User Access | 
+| HTTP Verb   | Endpoint                    | Description                                         |Admin Access  | User Access | 
 | :---------- | :-----------                |:----------------------------------                  |:-----------  |:----------- |
 | `GET`       | `api/Log`                   |  Returns Log(s)                                     | ☑️           |  ☑️        |
 | `DELETE`    | `api/Log`                   |  To delete a Log                                    | ☑️           |  ❌        |
