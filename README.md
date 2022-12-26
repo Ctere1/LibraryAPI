@@ -142,6 +142,9 @@ This software uses the following packages:
 - Swashbuckle
 - EntityFramework
 
+## ©License
+![GitHub](https://img.shields.io/github/license/Ctere1/LibraryAPI)
+
 ## 📌Contributors
 
 <a href="https://github.com/Ctere1/">
