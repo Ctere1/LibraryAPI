@@ -22,7 +22,7 @@
 
 </div>
 
-## ℹ️ Introduction
+## ℹ️Introduction
 Library API that you can manage the books and it's users using ASP-NET WEB API. It has 2 roles which are `Admin` and `User`. 
 
 It uses **MS-SQL** | **EntityFramework** on DB side. Authentication and authorization processes are performed using `Bearer Token`.
@@ -35,7 +35,7 @@ It uses **MS-SQL** | **EntityFramework** on DB side. Authentication and authoriz
 | `Get and Delete all auth Logs`              | `Get own profile auth Logs`        |        
 | `Update own profile credentials`            | `Update own profile credentials`   |      
 
-## 💾 Installation Guide
+## 💾Installation Guide
 
 To clone and run this application, you'll need [Git](https://git-scm.com), [ASP NET](https://dotnet.microsoft.com/en-us/apps/aspnet), [MS-SQL](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) and [Visual Studio](https://visualstudio.microsoft.com/downloads/) installed on your computer. From your command line:
 
