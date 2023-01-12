@@ -18,9 +18,9 @@
 
 <div align="center">
 
-![GitHub Repo stars](https://img.shields.io/github/stars/Ctere1/LibraryMVC?style=social)
-![GitHub forks](https://img.shields.io/github/forks/Ctere1/LibraryMVC?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/Ctere1/LibraryMVC?style=social)
+![GitHub Repo stars](https://img.shields.io/github/stars/Ctere1/LibraryMVC)
+![GitHub forks](https://img.shields.io/github/forks/Ctere1/LibraryMVC)
+![GitHub watchers](https://img.shields.io/github/watchers/Ctere1/LibraryMVC)
 
 </div>
 
