@@ -157,7 +157,7 @@ This software uses the following packages:
 - EntityFramework
 
 ## ©License
-![GitHub](https://img.shields.io/github/license/Ctere1/LibraryAPI)
+![GitHub](https://img.shields.io/github/license/Ctere1/LibraryAPI?style=flat-square)
 
 ```
 Copyright (c) 2022 Cemil TAN
